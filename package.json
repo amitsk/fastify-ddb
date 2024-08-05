@@ -1,0 +1,66 @@
+{
+  "name": "fastify-typescript-starter",
+  "version": "1.5.0",
+  "description": "Node.js boilerplate using fastify & TypeScript",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "check:types": "tsc --noEmit",
+    "build": "esbuild `find src \\( -name '*.ts' \\)` --platform=node --outdir=build --resolve-extensions=.js",
+    "build:docker:prod": "docker build . -t my-fastify-app --build-arg APP_ENV=production",
+    "start": "node build",
+    "dev": "tsx watch src .env | pino-pretty --colorize",
+    "pretest": "npm run build",
+    "test": "vitest",
+    "test:watch": "vitest -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amitsk/fastify-ddb"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "nodejs",
+    "fastify",
+    "typescript"
+  ],
+  "author": "Amit Kumar",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/lib-dynamodb": "^3.623.0",
+    "@fastify/cors": "^9.0.1",
+    "@fastify/jwt": "^8.0.1",
+    "@fastify/routes": "^5.1.0",
+    "@fastify/sensible": "^5.6.0",
+    "@fastify/static": "^7.0.4",
+    "@fastify/swagger": "^8.15.0",
+    "@fastify/swagger-ui": "^4.0.1",
+    "ajv": "^8.17.1",
+    "dotenv": "^16.4.5",
+    "env-schema": "^5.2.1",
+    "fastify": "^4.28.1",
+    "fastify-jwt": "^4.2.0",
+    "fastify-plugin": "^3.0.1",
+    "fastify-swagger": "^5.2.0",
+    "fastify-zod": "^1.4.0",
+    "zod": "^3.23.8",
+    "zod-to-json-schema": "^3.23.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.15",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "esbuild": "^0.14.54",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "pino-pretty": "^8.1.0",
+    "prettier": "^2.8.0",
+    "tsx": "^3.12.1",
+    "typescript": "^4.9.3",
+    "vitest": "^0.25.8"
+  }
+}
