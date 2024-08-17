@@ -12,7 +12,7 @@
     "start": "node build",
     "dev": "tsx watch src .env | pino-pretty --colorize",
     "pretest": "npm run build",
-    "test": "vitest",
+    "test": "vitest --run",
     "test:watch": "vitest -w"
   },
   "repository": {
@@ -38,6 +38,7 @@
     "@fastify/static": "^7.0.4",
     "@fastify/swagger": "^8.15.0",
     "@fastify/swagger-ui": "^4.0.1",
+    "@sinclair/typebox": "^0.23.5",
     "ajv": "^8.17.1",
     "dotenv": "^16.4.5",
     "env-schema": "^5.2.1",
