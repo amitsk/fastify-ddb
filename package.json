@@ -1,0 +1,42 @@
+{
+    "name": "fastify-ddb",
+    "version": "1.0.0",
+    "description": "Fastify API with DynamoDB for Ski Lift CRUD operations",
+    "type": "module",
+    "main": "dist/index.js",
+    "scripts": {
+        "dev": "tsx watch src/index.ts",
+        "build": "tsc",
+        "start": "node dist/index.js",
+        "create-table": "tsx scripts/create-table.ts",
+        "lint": "biome check .",
+        "lint:fix": "biome check --write .",
+        "format": "biome format --write ."
+    },
+    "keywords": [
+        "fastify",
+        "dynamodb",
+        "typescript",
+        "api"
+    ],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@aws-sdk/client-dynamodb": "^3.705.0",
+        "@aws-sdk/lib-dynamodb": "^3.705.0",
+        "@fastify/compress": "^8.0.1",
+        "@fastify/cors": "^10.0.1",
+        "@fastify/helmet": "^12.0.1",
+        "dotenv": "^16.4.7",
+        "fastify": "^5.2.0",
+        "fastify-plugin": "^5.0.1",
+        "zod": "^3.23.8"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^1.9.4",
+        "@types/node": "^22.10.2",
+        "pino-pretty": "^13.0.0",
+        "tsx": "^4.19.2",
+        "typescript": "^5.7.2"
+    }
+}
