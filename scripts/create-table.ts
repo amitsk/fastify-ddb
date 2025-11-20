@@ -10,7 +10,7 @@ dotenv.config();
 
 const client = new DynamoDBClient({
     region: process.env.DYNAMODB_LOCAL_REGION || "us-east-1",
-    endpoint: process.env.DYNAMODB_LOCAL_ENDPOINT || "http://localhost:8000",
+    endpoint: process.env.DYNAMODB_LOCAL_ENDPOINT || "http://localhost:9900",
     credentials: {
         accessKeyId: "dummy",
         secretAccessKey: "dummy",

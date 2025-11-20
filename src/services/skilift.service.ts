@@ -19,6 +19,7 @@ import type {
 } from "../schemas/skilift.schemas.js";
 import type {
     PaginatedResponse,
+    ResortData,
     SkiLiftDynamicData,
     SkiLiftRecord,
     SkiLiftStaticData,
@@ -87,8 +88,8 @@ export class SkiLiftService {
     /**
      * Create resort data
      */
-    async createResortData(data: CreateResortDataInput): Promise<SkiLiftRecord> {
-        const item = {
+    async createResortData(data: CreateResortDataInput): Promise<ResortData> {
+        const item: ResortData = {
             Lift: "Resort Data",
             Metadata: data.Metadata,
             TotalUniqueLiftRiders: data.TotalUniqueLiftRiders,
