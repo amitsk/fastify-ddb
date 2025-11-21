@@ -27,9 +27,12 @@ export class ValidationError extends AppError {
 }
 
 export class DynamoDBError extends AppError {
+    public cause?: any;
+
     constructor(message: string, originalError?: any) {
         super(message, 500, "DYNAMODB_ERROR");
         if (originalError) {
+            this.cause = originalError;
             this.stack = originalError.stack;
         }
     }

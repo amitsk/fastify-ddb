@@ -1,0 +1,36 @@
+{
+    "name": "fastify-ddb-cdk",
+    "version": "1.0.0",
+    "description": "CDK infrastructure for Fastify DynamoDB API",
+    "type": "module",
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc -w",
+        "synth": "cdk synth",
+        "synth:test": "cdk synth FastifyDdbStack-test",
+        "synth:prod": "cdk synth FastifyDdbStack-prod",
+        "deploy:test": "cdk deploy FastifyDdbStack-test",
+        "deploy:prod": "cdk deploy FastifyDdbStack-prod",
+        "destroy:test": "cdk destroy FastifyDdbStack-test",
+        "destroy:prod": "cdk destroy FastifyDdbStack-prod",
+        "diff:test": "cdk diff FastifyDdbStack-test",
+        "diff:prod": "cdk diff FastifyDdbStack-prod"
+    },
+    "keywords": [
+        "cdk",
+        "aws",
+        "ecs",
+        "fargate"
+    ],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/node": "^22.10.2",
+        "aws-cdk": "^2.172.0",
+        "typescript": "^5.7.2"
+    },
+    "dependencies": {
+        "aws-cdk-lib": "^2.172.0",
+        "constructs": "^10.4.2"
+    }
+}

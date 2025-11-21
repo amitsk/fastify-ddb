@@ -14,7 +14,22 @@
         "create-table": "tsx scripts/create-table.ts",
         "lint": "biome check .",
         "lint:fix": "biome check --write .",
-        "format": "biome format --write ."
+        "format": "biome format --write .",
+        "test": "vitest run",
+        "test:unit": "vitest run test/unit",
+        "test:integration": "vitest run test/integration",
+        "test:watch": "vitest",
+        "test:coverage": "vitest run --coverage",
+        "test:ui": "vitest --ui",
+        "cdk:install": "cd cdk && npm install",
+        "cdk:synth:test": "cd cdk && npm run synth:test",
+        "cdk:synth:prod": "cd cdk && npm run synth:prod",
+        "cdk:deploy:test": "cd cdk && npm run deploy:test",
+        "cdk:deploy:prod": "cd cdk && npm run deploy:prod",
+        "cdk:destroy:test": "cd cdk && npm run destroy:test",
+        "cdk:destroy:prod": "cd cdk && npm run destroy:prod",
+        "cdk:diff:test": "cd cdk && npm run diff:test",
+        "cdk:diff:prod": "cd cdk && npm run diff:prod"
     },
     "keywords": [
         "fastify",
@@ -38,9 +53,14 @@
     "devDependencies": {
         "@biomejs/biome": "^1.9.4",
         "@types/node": "^22.10.2",
+        "@vitest/coverage-v8": "^4.0.12",
+        "@vitest/ui": "^4.0.12",
+        "aws-sdk-client-mock": "^4.1.0",
+        "aws-sdk-client-mock-vitest": "^7.0.1",
         "esbuild": "^0.24.0",
         "pino-pretty": "^13.0.0",
         "tsx": "^4.19.2",
-        "typescript": "^5.7.2"
+        "typescript": "^5.7.2",
+        "vitest": "^4.0.12"
     }
 }
