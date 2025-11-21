@@ -14,6 +14,9 @@ A production-ready Fastify API with TypeScript that performs CRUD operations on 
 - ✅ **Plugin Architecture** - DynamoDB as a Fastify plugin
 - ✅ **Layered Architecture** - Routes → Services → Database
 - ✅ **Environment Configuration** - Support for local and remote DynamoDB
+- ✅ **Comprehensive Testing** - Vitest with 80% coverage thresholds
+- ✅ **AWS CDK Deployment** - ECS Fargate with auto-scaling
+- ✅ **Docker Support** - Multi-stage builds with Node.js 24
 
 ## Project Structure
 
@@ -36,10 +39,21 @@ fastify-ddb/
 │   │   └── error-handler.ts        # Error handling utilities
 │   ├── server.ts                   # Fastify server setup
 │   └── index.ts                    # Application entry point
+├── test/
+│   ├── helpers/                    # Test utilities and mock data
+│   ├── unit/                       # Unit tests
+│   └── integration/                # Integration tests
+├── cdk/
+│   ├── bin/                        # CDK app entry point
+│   ├── lib/                        # CDK stack definitions
+│   └── package.json                # CDK dependencies
 ├── datamodel/
 │   └── skilifts.json               # DynamoDB data model
 ├── scripts/
 │   └── create-table.ts             # Script to create DynamoDB table
+├── Dockerfile                      # Multi-stage Docker build
+├── build.mjs                       # esbuild configuration
+├── vitest.config.ts                # Vitest test configuration
 ├── .env                            # Environment variables
 ├── .env.example                    # Environment variables template
 ├── package.json
@@ -297,6 +311,153 @@ All errors return a consistent JSON format:
 - **DynamoDB Document Client** - Simplified data marshalling
 - **Efficient Queries** - Uses GSI for optimized access patterns
 
+## Testing
+
+This project uses **Vitest** for testing with comprehensive unit and integration test coverage.
+
+### Test Stack
+
+- **Vitest** - Fast, modern test runner with native ESM support
+- **aws-sdk-client-mock** - Mock AWS SDK v3 calls without AWS credentials
+- **Coverage** - Built-in v8 coverage with 80% thresholds
+
+### Running Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run unit tests only
+npm run test:unit
+
+# Run integration tests only
+npm run test:integration
+
+# Watch mode (re-run on changes)
+npm run test:watch
+
+# Generate coverage report
+npm run test:coverage
+
+# Open Vitest UI
+npm run test:ui
+```
+
+### Test Structure
+
+```
+test/
+├── helpers/
+│   ├── mock-data.ts          # Sample test data
+│   └── test-utils.ts         # Shared utilities
+├── unit/
+│   ├── services/             # Service layer tests
+│   ├── schemas/              # Schema validation tests
+│   └── utils/                # Utility function tests
+└── integration/
+    └── routes/               # API endpoint tests
+```
+
+### Coverage Requirements
+
+- **Lines**: 80%
+- **Functions**: 80%
+- **Branches**: 80%
+- **Statements**: 80%
+
+For detailed testing documentation, see [TESTING.md](TESTING.md).
+
+## Deployment
+
+### AWS CDK Deployment
+
+Deploy the API to AWS ECS Fargate using AWS CDK infrastructure as code.
+
+#### Prerequisites
+
+- AWS Account with configured credentials
+- Docker installed and running
+- Node.js 24 or higher
+- Existing VPC in your AWS account
+- DynamoDB tables created (`SkiLifts-test` and `SkiLifts`)
+
+#### Quick Start
+
+```bash
+# Install CDK dependencies
+npm run cdk:install
+
+# Bootstrap CDK (first time only)
+cd cdk && npx cdk bootstrap
+
+# Deploy to test environment
+npm run cdk:deploy:test
+
+# Deploy to production
+npm run cdk:deploy:prod
+```
+
+#### Environments
+
+**Test Environment**
+- CPU: 0.5 vCPU, Memory: 1 GB
+- Scaling: 1-2 tasks
+- Table: `SkiLifts-test`
+- Log Level: debug
+
+**Production Environment**
+- CPU: 1 vCPU, Memory: 2 GB
+- Scaling: 2-10 tasks
+- Table: `SkiLifts`
+- Log Level: info
+
+#### CDK Commands
+
+```bash
+# Synthesize CloudFormation template
+npm run cdk:synth:test
+npm run cdk:synth:prod
+
+# Preview changes
+npm run cdk:diff:test
+npm run cdk:diff:prod
+
+# Deploy
+npm run cdk:deploy:test
+npm run cdk:deploy:prod
+
+# Destroy resources
+npm run cdk:destroy:test
+npm run cdk:destroy:prod
+```
+
+#### Architecture
+
+- **ECS Fargate** - Serverless container orchestration
+- **Application Load Balancer** - Public HTTP endpoint
+- **Auto-scaling** - CPU and memory-based scaling
+- **CloudWatch Logs** - Centralized logging
+- **IAM Roles** - DynamoDB table access permissions
+
+For detailed deployment documentation, see [cdk/README.md](cdk/README.md).
+
+### Docker Deployment
+
+Build and run the application using Docker:
+
+```bash
+# Build the image
+docker build -t fastify-ddb .
+
+# Run the container
+docker run -p 3000:3000 \
+  -e DYNAMODB_MODE=local \
+  -e DYNAMODB_LOCAL_ENDPOINT=http://host.docker.internal:8000 \
+  -e DYNAMODB_TABLE_NAME=SkiLifts \
+  fastify-ddb
+```
+
 ## License
 
 MIT
+
