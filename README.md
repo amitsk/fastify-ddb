@@ -60,8 +60,9 @@ fastify-ddb/
 ├── tsconfig.json
 └── biome.json
 ```
-
+  
 ## Data Model
+Uses the Ski resort data model from the AWS documentation https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.SampleModels.html#workbench.SampleModels.SkiResortDataModel.
 
 The SkiLifts table uses a composite key design:
 
